@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>false</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>populate all nessary fields with proper values onLoad</description>
+        <field>active</field>
+        <global>true</global>
+        <isolate_script>true</isolate_script>
+        <messages/>
+        <name>Populate Email onLoad</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+	
+    var getEmailAddr = new GlideAjax('test');
+    getEmailAddr.addParam('sysparm_name', 'getEmail');
+    getEmailAddr.addParam('sysparm_userID', g_form.getValue('u_requested_for'));
+    getEmailAddr.getXML(populateEmailField);
+
+    function populateEmailField(response) {
+        var emailFromScriptInclude = response.responseXML.documentElement.getAttribute("answer");
+        g_form.clearValue('u_requested_for_email');
+        g_form.setValue('u_requested_for_email', emailFromScriptInclude);
+    }
+
+
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2022-03-29 10:58:01</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>666b9ed997a201106573f5b3f153afe5</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Populate Email onLoad</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_client_666b9ed997a201106573f5b3f153afe5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2022-03-29 11:07:47</sys_updated_on>
+        <table>x_58872_needit_needit</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
